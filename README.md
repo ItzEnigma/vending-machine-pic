@@ -21,8 +21,10 @@
 ---
 ## Attachments
 Simulation schematic and video illustrating the vending machine operation
-![Vending Machine](https://github.com/ItzEnigma/vending-machine-pic/assets/97047710/9c033037-d026-4d85-b3ce-776fa5fcbda7)
+
+![Vending Machine](https://github.com/ItzEnigma/vending-machine-pic/assets/97047710/caffb815-9a0b-4e78-8246-6b73ee658a1b)
+
+https://github.com/ItzEnigma/vending-machine-pic/assets/97047710/a8bf8b90-09b5-42fc-b2d9-b670cafb6865
 
 
-https://github.com/ItzEnigma/vending-machine-pic/assets/97047710/f5d13f8b-7c1d-44ad-b11e-68b7536a56cc
 
