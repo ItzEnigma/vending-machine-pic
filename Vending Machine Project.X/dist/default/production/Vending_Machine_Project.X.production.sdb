@@ -1,0 +1,474 @@
+[p GLOBOPT AUTOSTATIC PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F882 ]
+[d frameptr 0 ]
+"40 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/DIO/DIO.c
+[e E1232 . `uc
+DIO_PORTA 0
+DIO_PORTB 1
+DIO_PORTC 2
+]
+[e E1237 . `uc
+DIO_PIN0 0
+DIO_PIN1 1
+DIO_PIN2 2
+DIO_PIN3 3
+DIO_PIN4 4
+DIO_PIN5 5
+DIO_PIN6 6
+DIO_PIN7 7
+]
+"73
+[e E1247 . `uc
+DIO_OUTPUT_MODE 10
+DIO_INPUT_MODE_NOPULL 11
+DIO_INTERRUPT_CHANGE_MODE 12
+]
+"46 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/ADC/ADC.c
+[e E1232 . `uc
+ADC0 0
+ADC1 1
+ADC2 2
+ADC3 3
+ADC4 4
+ADC8 8
+ADC9 9
+ADC10 10
+ADC11 11
+ADC12 12
+ADC13 13
+]
+"54 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/VendingMachine/VM.c
+[e E1232 . `uc
+VM_STATE_INITIAL 200
+VM_STATE_DRINK_SELECTION 201
+VM_STATE_COIN_INSERTION 202
+VM_STATE_DRINK_DISPENSE 203
+VM_STATE_DRINK_READY 204
+VM_STATE_DISPENSE_CHANGE 205
+VM_STATE_TILT_SENSING 206
+VM_STATE_ALARM 207
+]
+"77
+[e E1261 . `uc
+DIO_PORTA 0
+DIO_PORTB 1
+DIO_PORTC 2
+]
+[e E1266 . `uc
+DIO_PIN0 0
+DIO_PIN1 1
+DIO_PIN2 2
+DIO_PIN3 3
+DIO_PIN4 4
+DIO_PIN5 5
+DIO_PIN6 6
+DIO_PIN7 7
+]
+[e E1276 . `uc
+DIO_OUTPUT_MODE 10
+DIO_INPUT_MODE_NOPULL 11
+DIO_INTERRUPT_CHANGE_MODE 12
+]
+"114
+[e E1242 . `uc
+VM_DRINK_COLA 0
+VM_DRINK_LEMONADE 1
+VM_DRINK_ORANGE 2
+VM_DRINK_WATER 3
+]
+"329
+[e E1248 . `uc
+VM_COIN_COLA_80 8
+VM_COIN_LEMONADE_80 8
+VM_COIN_ORANGE_60 6
+VM_COIN_WATER_50 5
+]
+"368
+[e E1289 . `uc
+ADC0 0
+ADC1 1
+ADC2 2
+ADC3 3
+ADC4 4
+ADC8 8
+ADC9 9
+ADC10 10
+ADC11 11
+ADC12 12
+ADC13 13
+]
+"62 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"35 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\main.c
+[v _main main `(v  1 e 1 0 ]
+"26 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/ADC/ADC.c
+[v _ADC_Init ADC_Init `(v  1 e 1 0 ]
+"46
+[v _ADC_Read ADC_Read `(ui  1 e 2 0 ]
+"40 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/DIO/DIO.c
+[v _DIO_setPinDir DIO_setPinDir `(v  1 s 1 DIO_setPinDir ]
+"73
+[v _DIO_setPinMode DIO_setPinMode `(v  1 e 1 0 ]
+"146
+[v _DIO_setPinValue DIO_setPinValue `(v  1 e 1 0 ]
+[v i1_DIO_setPinValue DIO_setPinValue `(v  1 e 1 0 ]
+"36 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/LCD/LCD.c
+[v _LCD_Out LCD_Out `(v  1 s 1 LCD_Out ]
+"71
+[v _LCD_Write LCD_Write `(v  1 e 1 0 ]
+"85
+[v _LCD_Init LCD_Init `(v  1 e 1 0 ]
+"127
+[v _LCD_PutChar LCD_PutChar `(v  1 e 1 0 ]
+"147
+[v _LCD_PutString LCD_PutString `(v  1 e 1 0 ]
+"71 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/VendingMachine/VM.c
+[v _VM_Init VM_Init `(v  1 e 1 0 ]
+"124
+[v _VM_Running VM_Running `(v  1 e 1 0 ]
+"166
+[v _VM_Mode_DrinkSelection VM_Mode_DrinkSelection `(v  1 s 1 VM_Mode_DrinkSelection ]
+"193
+[v _VM_Mode_CoinInsertion VM_Mode_CoinInsertion `(v  1 s 1 VM_Mode_CoinInsertion ]
+"217
+[v _VM_Mode_DispenseDrink VM_Mode_DispenseDrink `(v  1 s 1 VM_Mode_DispenseDrink ]
+"255
+[v _VM_Mode_DispenseChange VM_Mode_DispenseChange `(v  1 s 1 VM_Mode_DispenseChange ]
+"284
+[v _TIMR1_Delay5s TIMR1_Delay5s `(v  1 s 1 TIMR1_Delay5s ]
+"298
+[v _myISR myISR `II(v  1 e 1 0 ]
+"166 C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+"228
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+[s S419 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"245
+[u S428 . 1 `S419 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES428  1 e 1 @6 ]
+"290
+[v _PORTC PORTC `VEuc  1 e 1 @7 ]
+[s S107 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"403
+[s S116 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 TMR0IE 1 0 :1:5 
+]
+[u S121 . 1 `S107 1 . 1 0 `S116 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES121  1 e 1 @11 ]
+[s S315 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"474
+[u S323 . 1 `S315 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES323  1 e 1 @12 ]
+"571
+[v _TMR1 TMR1 `VEus  1 e 2 @14 ]
+"592
+[v _T1CON T1CON `VEuc  1 e 1 @16 ]
+"686
+[v _TMR2 TMR2 `VEuc  1 e 1 @17 ]
+[s S268 . 1 `uc 1 T2CKPS 1 0 :2:0 
+`uc 1 TMR2ON 1 0 :1:2 
+`uc 1 TOUTPS 1 0 :4:3 
+]
+"714
+[s S272 . 1 `uc 1 T2CKPS0 1 0 :1:0 
+`uc 1 T2CKPS1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 TOUTPS0 1 0 :1:3 
+`uc 1 TOUTPS1 1 0 :1:4 
+`uc 1 TOUTPS2 1 0 :1:5 
+`uc 1 TOUTPS3 1 0 :1:6 
+]
+[u S280 . 1 `S268 1 . 1 0 `S272 1 . 1 0 ]
+[v _T2CONbits T2CONbits `VES280  1 e 1 @18 ]
+"1159
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+"1166
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
+[s S179 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+`uc 1 ADCS 1 0 :2:6 
+]
+"1197
+[s S184 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+`uc 1 ADCS0 1 0 :1:6 
+`uc 1 ADCS1 1 0 :1:7 
+]
+[s S193 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S196 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[u S199 . 1 `S179 1 . 1 0 `S184 1 . 1 0 `S193 1 . 1 0 `S196 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES199  1 e 1 @31 ]
+[s S391 . 1 `uc 1 PS 1 0 :3:0 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+`uc 1 INTEDG 1 0 :1:6 
+`uc 1 nRBPU 1 0 :1:7 
+]
+"1287
+[s S398 . 1 `uc 1 PS0 1 0 :1:0 
+`uc 1 PS1 1 0 :1:1 
+`uc 1 PS2 1 0 :1:2 
+]
+[u S402 . 1 `S391 1 . 1 0 `S398 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES402  1 e 1 @129 ]
+"1337
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"1399
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1461
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
+[s S296 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSPIE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+]
+"1560
+[u S304 . 1 `S296 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES304  1 e 1 @140 ]
+"1883
+[v _PR2 PR2 `VEuc  1 e 1 @146 ]
+"2258
+[v _IOCB IOCB `VEuc  1 e 1 @150 ]
+"2812
+[v _ADRESL ADRESL `VEuc  1 e 1 @158 ]
+"2819
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
+"3229
+[v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
+"3273
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+[s S35 . 5 `*.39VEuc 1 PORT 2 0 `uc 1 RS 1 2 :3:0 
+`uc 1 EN 1 2 :3:3 
+`uc 1 D4 1 3 :3:0 
+`uc 1 D5 1 3 :3:3 
+`uc 1 D6 1 4 :3:0 
+`uc 1 D7 1 4 :3:3 
+]
+"24 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/LCD/LCD.c
+[v _lcd lcd `S35  1 e 5 0 ]
+"48 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/VendingMachine/VM.c
+[v _adc_val adc_val `ui  1 s 2 adc_val ]
+"51
+[v _temp temp `[2]uc  1 s 2 temp ]
+"54
+[v _gCurrentState gCurrentState `VEuc  1 s 1 gCurrentState ]
+"55
+[v _gCurrentDrink gCurrentDrink `VEuc  1 s 1 gCurrentDrink ]
+"56
+[v _gCurrentDrinkPrice gCurrentDrinkPrice `VEc  1 s 1 gCurrentDrinkPrice ]
+"35 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"45
+} 0
+"124 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/VendingMachine/VM.c
+[v _VM_Running VM_Running `(v  1 e 1 0 ]
+{
+"157
+} 0
+"166
+[v _VM_Mode_DrinkSelection VM_Mode_DrinkSelection `(v  1 s 1 VM_Mode_DrinkSelection ]
+{
+"185
+} 0
+"217
+[v _VM_Mode_DispenseDrink VM_Mode_DispenseDrink `(v  1 s 1 VM_Mode_DispenseDrink ]
+{
+"230
+[v VM_Mode_DispenseDrink@i i `uc  1 a 1 13 ]
+"248
+} 0
+"255
+[v _VM_Mode_DispenseChange VM_Mode_DispenseChange `(v  1 s 1 VM_Mode_DispenseChange ]
+{
+"258
+[v VM_Mode_DispenseChange@change_count change_count `uc  1 a 1 13 ]
+"277
+} 0
+"284
+[v _TIMR1_Delay5s TIMR1_Delay5s `(v  1 s 1 TIMR1_Delay5s ]
+{
+"288
+[v TIMR1_Delay5s@i i `uc  1 a 1 0 ]
+"293
+} 0
+"193
+[v _VM_Mode_CoinInsertion VM_Mode_CoinInsertion `(v  1 s 1 VM_Mode_CoinInsertion ]
+{
+"210
+} 0
+"71
+[v _VM_Init VM_Init `(v  1 e 1 0 ]
+{
+[s S35 . 5 `*.39VEuc 1 PORT 2 0 `uc 1 RS 1 2 :3:0 
+`uc 1 EN 1 2 :3:3 
+`uc 1 D4 1 3 :3:0 
+`uc 1 D5 1 3 :3:3 
+`uc 1 D6 1 4 :3:0 
+`uc 1 D7 1 4 :3:3 
+]
+"103
+[v VM_Init@lcd lcd `S35  1 a 5 13 ]
+"100
+[v VM_Init@F1329 F1329 `S35  1 s 5 F1329 ]
+"118
+} 0
+"147 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/LCD/LCD.c
+[v _LCD_PutString LCD_PutString `(v  1 e 1 0 ]
+{
+"149
+[v LCD_PutString@i i `i  1 a 2 11 ]
+"147
+[v LCD_PutString@a a `*.26uc  1 p 2 6 ]
+"152
+} 0
+"127
+[v _LCD_PutChar LCD_PutChar `(v  1 e 1 0 ]
+{
+[v LCD_PutChar@c c `uc  1 a 1 wreg ]
+[v LCD_PutChar@c c `uc  1 a 1 wreg ]
+"129
+[v LCD_PutChar@c c `uc  1 a 1 5 ]
+"141
+} 0
+"85
+[v _LCD_Init LCD_Init `(v  1 e 1 0 ]
+{
+[s S35 . 5 `*.39VEuc 1 PORT 2 0 `uc 1 RS 1 2 :3:0 
+`uc 1 EN 1 2 :3:3 
+`uc 1 D4 1 3 :3:0 
+`uc 1 D5 1 3 :3:3 
+`uc 1 D6 1 4 :3:0 
+`uc 1 D7 1 4 :3:3 
+]
+[v LCD_Init@display display `S35  1 p 5 6 ]
+"121
+} 0
+"71
+[v _LCD_Write LCD_Write `(v  1 e 1 0 ]
+{
+[v LCD_Write@c c `uc  1 a 1 wreg ]
+[v LCD_Write@c c `uc  1 a 1 wreg ]
+"73
+[v LCD_Write@c c `uc  1 a 1 5 ]
+"79
+} 0
+"36
+[v _LCD_Out LCD_Out `(v  1 s 1 LCD_Out ]
+{
+[v LCD_Out@c c `uc  1 a 1 wreg ]
+[v LCD_Out@c c `uc  1 a 1 wreg ]
+"38
+[v LCD_Out@c c `uc  1 a 1 2 ]
+"65
+} 0
+"146 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/DIO/DIO.c
+[v _DIO_setPinValue DIO_setPinValue `(v  1 e 1 0 ]
+{
+[v DIO_setPinValue@port port `E1232  1 a 1 wreg ]
+[v DIO_setPinValue@port port `E1232  1 a 1 wreg ]
+[v DIO_setPinValue@pin pin `E1237  1 p 1 0 ]
+[v DIO_setPinValue@value value `uc  1 p 1 1 ]
+[v DIO_setPinValue@port port `E1232  1 a 1 4 ]
+"172
+} 0
+"73
+[v _DIO_setPinMode DIO_setPinMode `(v  1 e 1 0 ]
+{
+[v DIO_setPinMode@port port `E1232  1 a 1 wreg ]
+[v DIO_setPinMode@port port `E1232  1 a 1 wreg ]
+[v DIO_setPinMode@pin pin `E1237  1 p 1 5 ]
+[v DIO_setPinMode@mode mode `E1247  1 p 1 6 ]
+[v DIO_setPinMode@port port `E1232  1 a 1 9 ]
+"140
+} 0
+"40
+[v _DIO_setPinDir DIO_setPinDir `(v  1 s 1 DIO_setPinDir ]
+{
+[v DIO_setPinDir@port port `E1232  1 a 1 wreg ]
+[v DIO_setPinDir@port port `E1232  1 a 1 wreg ]
+[v DIO_setPinDir@pin pin `E1237  1 p 1 0 ]
+[v DIO_setPinDir@direction direction `uc  1 p 1 1 ]
+[v DIO_setPinDir@port port `E1232  1 a 1 4 ]
+"66
+} 0
+"26 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/ADC/ADC.c
+[v _ADC_Init ADC_Init `(v  1 e 1 0 ]
+{
+"40
+} 0
+"298 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/VendingMachine/VM.c
+[v _myISR myISR `II(v  1 e 1 0 ]
+{
+"300
+[v myISR@timer_count timer_count `VEuc  1 s 1 timer_count ]
+"377
+} 0
+"146 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/DIO/DIO.c
+[v i1_DIO_setPinValue DIO_setPinValue `(v  1 e 1 0 ]
+{
+[v i1DIO_setPinValue@port port `E1232  1 a 1 wreg ]
+[v i1DIO_setPinValue@port port `E1232  1 a 1 wreg ]
+[v i1DIO_setPinValue@pin pin `E1237  1 p 1 0 ]
+[v i1DIO_setPinValue@value value `uc  1 p 1 1 ]
+[v i1DIO_setPinValue@port port `E1232  1 a 1 4 ]
+"172
+} 0
+"46 D:\Work\UK (PIC Assignments)\Project\Vending Machine Project.X\source/ADC/ADC.c
+[v _ADC_Read ADC_Read `(ui  1 e 2 0 ]
+{
+[v ADC_Read@channel channel `E1232  1 a 1 wreg ]
+"48
+[v ADC_Read@result result `ui  1 a 2 3 ]
+"46
+[v ADC_Read@channel channel `E1232  1 a 1 wreg ]
+"51
+[v ADC_Read@channel channel `E1232  1 a 1 5 ]
+"73
+} 0

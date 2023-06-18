@@ -1,0 +1,1634 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"54 source/VendingMachine/VM.c
+[; ;source/VendingMachine/VM.c: 54: static volatile unsigned char gCurrentState = VM_STATE_INITIAL;
+[c E1232 200 201 202 203 204 205 206 207 .. ]
+[n E1232 . VM_STATE_INITIAL VM_STATE_DRINK_SELECTION VM_STATE_COIN_INSERTION VM_STATE_DRINK_DISPENSE VM_STATE_DRINK_READY VM_STATE_DISPENSE_CHANGE VM_STATE_TILT_SENSING VM_STATE_ALARM  ]
+"77
+[; ;source/VendingMachine/VM.c: 77:     DIO_setPinMode(DIO_PORTA, DIO_PIN0, DIO_OUTPUT_MODE);
+[c E1261 0 1 2 .. ]
+[n E1261 . DIO_PORTA DIO_PORTB DIO_PORTC  ]
+[c E1266 0 1 2 3 4 5 6 7 .. ]
+[n E1266 . DIO_PIN0 DIO_PIN1 DIO_PIN2 DIO_PIN3 DIO_PIN4 DIO_PIN5 DIO_PIN6 DIO_PIN7  ]
+[c E1276 10 11 12 .. ]
+[n E1276 . DIO_OUTPUT_MODE DIO_INPUT_MODE_NOPULL DIO_INTERRUPT_CHANGE_MODE  ]
+"82 source/VendingMachine/../DIO/DIO.h
+[; ;source/VendingMachine/../DIO/DIO.h: 82: void DIO_setPinMode(DIO_port_e port, DIO_pin_e pin, DIO_mode_e mode);
+[v _DIO_setPinMode `(v ~T0 @X0 0 ef3`E1261`E1266`E1276 ]
+"88
+[; ;source/VendingMachine/../DIO/DIO.h: 88: void DIO_setPinValue(DIO_port_e port, DIO_pin_e pin, unsigned char value);
+[v _DIO_setPinValue `(v ~T0 @X0 0 ef3`E1261`E1266`uc ]
+"65 source/VendingMachine/../ADC/ADC.h
+[; ;source/VendingMachine/../ADC/ADC.h: 65: void ADC_Init();
+[v _ADC_Init `(v ~T0 @X0 0 e? ]
+"699 C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 699:     struct {
+[s S25 :2 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S25 . T2CKPS TMR2ON TOUTPS ]
+"704
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 704:     struct {
+[s S26 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S26 . T2CKPS0 T2CKPS1 . TOUTPS0 TOUTPS1 TOUTPS2 TOUTPS3 ]
+"698
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 698: typedef union {
+[u S24 `S25 1 `S26 1 ]
+[n S24 . . . ]
+"714
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 714: extern volatile T2CONbits_t T2CONbits __attribute__((address(0x012)));
+[v _T2CONbits `VS24 ~T0 @X0 0 e@18 ]
+"1550
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1550:     struct {
+[s S59 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S59 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE ]
+"1549
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1549: typedef union {
+[u S58 `S59 1 ]
+[n S58 . . ]
+"1560
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1560: extern volatile PIE1bits_t PIE1bits __attribute__((address(0x08C)));
+[v _PIE1bits `VS58 ~T0 @X0 0 e@140 ]
+"464
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 464:     struct {
+[s S17 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S17 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
+"463
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 463: typedef union {
+[u S16 `S17 1 ]
+[n S16 . . ]
+"474
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 474: extern volatile PIR1bits_t PIR1bits __attribute__((address(0x00C)));
+[v _PIR1bits `VS16 ~T0 @X0 0 e@12 ]
+"1883
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1883: extern volatile unsigned char PR2 __attribute__((address(0x092)));
+[v _PR2 `Vuc ~T0 @X0 0 e@146 ]
+"686
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 686: extern volatile unsigned char TMR2 __attribute__((address(0x011)));
+[v _TMR2 `Vuc ~T0 @X0 0 e@17 ]
+"35 source/VendingMachine/../LCD/LCD.h
+[; ;source/VendingMachine/../LCD/LCD.h: 35: typedef struct {
+[s S134 `*Vuc 1 :3 `uc 1 :3 `uc 1 :3 `uc 1 :3 `uc 1 :3 `uc 1 :3 `uc 1 ]
+[n S134 . PORT RS EN D4 D5 D6 D7 ]
+"290 C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 290: extern volatile unsigned char PORTC __attribute__((address(0x007)));
+[v _PORTC `Vuc ~T0 @X0 0 e@7 ]
+"81 source/VendingMachine/../LCD/LCD.h
+[; ;source/VendingMachine/../LCD/LCD.h: 81: void LCD_Init ( LCD display );
+[v _LCD_Init `(v ~T0 @X0 0 ef1`S134 ]
+"99
+[; ;source/VendingMachine/../LCD/LCD.h: 99: void LCD_Write ( unsigned char c );
+[v _LCD_Write `(v ~T0 @X0 0 ef1`uc ]
+"386 C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 386:     struct {
+[s S14 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S14 . RBIF INTF T0IF RBIE INTE T0IE PEIE GIE ]
+"396
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 396:     struct {
+[s S15 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S15 . . TMR0IF . TMR0IE ]
+"385
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 385: typedef union {
+[u S13 `S14 1 `S15 1 ]
+[n S13 . . . ]
+"403
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 403: extern volatile INTCONbits_t INTCONbits __attribute__((address(0x00B)));
+[v _INTCONbits `VS13 ~T0 @X0 0 e@11 ]
+"114 source/VendingMachine/VM.c
+[; ;source/VendingMachine/VM.c: 114:     gCurrentDrink = VM_DRINK_COLA;
+[c E1242 0 1 2 3 .. ]
+[n E1242 . VM_DRINK_COLA VM_DRINK_LEMONADE VM_DRINK_ORANGE VM_DRINK_WATER  ]
+"93 source/VendingMachine/../LCD/LCD.h
+[; ;source/VendingMachine/../LCD/LCD.h: 93: void LCD_PutString ( char *a );
+[v _LCD_PutString `(v ~T0 @X0 0 ef1`*uc ]
+"20 source/VendingMachine/VM_prv.h
+[; ;source/VendingMachine/VM_prv.h: 20: static void VM_Mode_DrinkSelection(void);
+[v _VM_Mode_DrinkSelection `(v ~T0 @X0 0 sf ]
+"28
+[; ;source/VendingMachine/VM_prv.h: 28: static void VM_Mode_CoinInsertion(void);
+[v _VM_Mode_CoinInsertion `(v ~T0 @X0 0 sf ]
+"35
+[; ;source/VendingMachine/VM_prv.h: 35: static void VM_Mode_DispenseDrink(void);
+[v _VM_Mode_DispenseDrink `(v ~T0 @X0 0 sf ]
+"49
+[; ;source/VendingMachine/VM_prv.h: 49: static void TIMR1_Delay5s(void);
+[v _TIMR1_Delay5s `(v ~T0 @X0 0 sf ]
+"42
+[; ;source/VendingMachine/VM_prv.h: 42: static void VM_Mode_DispenseChange(void);
+[v _VM_Mode_DispenseChange `(v ~T0 @X0 0 sf ]
+"1273 C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1273:     struct {
+[s S48 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S48 . PS PSA T0SE T0CS INTEDG nRBPU ]
+"1281
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1281:     struct {
+[s S49 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S49 . PS0 PS1 PS2 ]
+"1272
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1272: typedef union {
+[u S47 `S48 1 `S49 1 ]
+[n S47 . . . ]
+"1287
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1287: extern volatile OPTION_REGbits_t OPTION_REGbits __attribute__((address(0x081)));
+[v _OPTION_REGbits `VS47 ~T0 @X0 0 e@129 ]
+"592
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 592: extern volatile unsigned char T1CON __attribute__((address(0x010)));
+[v _T1CON `Vuc ~T0 @X0 0 e@16 ]
+"571
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 571: extern volatile unsigned short TMR1 __attribute__((address(0x00E)));
+[v _TMR1 `Vus ~T0 @X0 0 e@14 ]
+[t ~ __interrupt . k ]
+[t T1 __interrupt ]
+"234
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 234:     struct {
+[s S8 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S8 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
+"233
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 233: typedef union {
+[u S7 `S8 1 ]
+[n S7 . . ]
+"245
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 245: extern volatile PORTBbits_t PORTBbits __attribute__((address(0x006)));
+[v _PORTBbits `VS7 ~T0 @X0 0 e@6 ]
+"329 source/VendingMachine/VM.c
+[; ;source/VendingMachine/VM.c: 329:                             gCurrentDrinkPrice = VM_COIN_COLA_80;
+[c E1248 8 8 6 5 .. ]
+[n E1248 . VM_COIN_COLA_80 VM_COIN_LEMONADE_80 VM_COIN_ORANGE_60 VM_COIN_WATER_50  ]
+"368
+[; ;source/VendingMachine/VM.c: 368:             adc_val = ADC_Read(ADC9);
+[c E1289 0 1 2 3 4 8 9 10 11 12 13 .. ]
+[n E1289 . ADC0 ADC1 ADC2 ADC3 ADC4 ADC8 ADC9 ADC10 ADC11 ADC12 ADC13  ]
+"71 source/VendingMachine/../ADC/ADC.h
+[; ;source/VendingMachine/../ADC/ADC.h: 71: unsigned int ADC_Read(ADC_channel_t channel);
+[v _ADC_Read `(ui ~T0 @X0 0 ef1`E1289 ]
+"54 C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 54: __asm("INDF equ 00h");
+[; <" INDF equ 00h ;# ">
+"61
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 61: __asm("TMR0 equ 01h");
+[; <" TMR0 equ 01h ;# ">
+"68
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 68: __asm("PCL equ 02h");
+[; <" PCL equ 02h ;# ">
+"75
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 75: __asm("STATUS equ 03h");
+[; <" STATUS equ 03h ;# ">
+"161
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 161: __asm("FSR equ 04h");
+[; <" FSR equ 04h ;# ">
+"168
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 168: __asm("PORTA equ 05h");
+[; <" PORTA equ 05h ;# ">
+"230
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 230: __asm("PORTB equ 06h");
+[; <" PORTB equ 06h ;# ">
+"292
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 292: __asm("PORTC equ 07h");
+[; <" PORTC equ 07h ;# ">
+"354
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 354: __asm("PORTE equ 09h");
+[; <" PORTE equ 09h ;# ">
+"375
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 375: __asm("PCLATH equ 0Ah");
+[; <" PCLATH equ 0Ah ;# ">
+"382
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 382: __asm("INTCON equ 0Bh");
+[; <" INTCON equ 0Bh ;# ">
+"460
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 460: __asm("PIR1 equ 0Ch");
+[; <" PIR1 equ 0Ch ;# ">
+"516
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 516: __asm("PIR2 equ 0Dh");
+[; <" PIR2 equ 0Dh ;# ">
+"573
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 573: __asm("TMR1 equ 0Eh");
+[; <" TMR1 equ 0Eh ;# ">
+"580
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 580: __asm("TMR1L equ 0Eh");
+[; <" TMR1L equ 0Eh ;# ">
+"587
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 587: __asm("TMR1H equ 0Fh");
+[; <" TMR1H equ 0Fh ;# ">
+"594
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 594: __asm("T1CON equ 010h");
+[; <" T1CON equ 010h ;# ">
+"688
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 688: __asm("TMR2 equ 011h");
+[; <" TMR2 equ 011h ;# ">
+"695
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 695: __asm("T2CON equ 012h");
+[; <" T2CON equ 012h ;# ">
+"766
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 766: __asm("SSPBUF equ 013h");
+[; <" SSPBUF equ 013h ;# ">
+"773
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 773: __asm("SSPCON equ 014h");
+[; <" SSPCON equ 014h ;# ">
+"843
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 843: __asm("CCPR1 equ 015h");
+[; <" CCPR1 equ 015h ;# ">
+"850
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 850: __asm("CCPR1L equ 015h");
+[; <" CCPR1L equ 015h ;# ">
+"857
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 857: __asm("CCPR1H equ 016h");
+[; <" CCPR1H equ 016h ;# ">
+"864
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 864: __asm("CCP1CON equ 017h");
+[; <" CCP1CON equ 017h ;# ">
+"961
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 961: __asm("RCSTA equ 018h");
+[; <" RCSTA equ 018h ;# ">
+"1056
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1056: __asm("TXREG equ 019h");
+[; <" TXREG equ 019h ;# ">
+"1063
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1063: __asm("RCREG equ 01Ah");
+[; <" RCREG equ 01Ah ;# ">
+"1070
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1070: __asm("CCPR2 equ 01Bh");
+[; <" CCPR2 equ 01Bh ;# ">
+"1077
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1077: __asm("CCPR2L equ 01Bh");
+[; <" CCPR2L equ 01Bh ;# ">
+"1084
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1084: __asm("CCPR2H equ 01Ch");
+[; <" CCPR2H equ 01Ch ;# ">
+"1091
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1091: __asm("CCP2CON equ 01Dh");
+[; <" CCP2CON equ 01Dh ;# ">
+"1161
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1161: __asm("ADRESH equ 01Eh");
+[; <" ADRESH equ 01Eh ;# ">
+"1168
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1168: __asm("ADCON0 equ 01Fh");
+[; <" ADCON0 equ 01Fh ;# ">
+"1269
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1269: __asm("OPTION_REG equ 081h");
+[; <" OPTION_REG equ 081h ;# ">
+"1339
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1339: __asm("TRISA equ 085h");
+[; <" TRISA equ 085h ;# ">
+"1401
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1401: __asm("TRISB equ 086h");
+[; <" TRISB equ 086h ;# ">
+"1463
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1463: __asm("TRISC equ 087h");
+[; <" TRISC equ 087h ;# ">
+"1525
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1525: __asm("TRISE equ 089h");
+[; <" TRISE equ 089h ;# ">
+"1546
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1546: __asm("PIE1 equ 08Ch");
+[; <" PIE1 equ 08Ch ;# ">
+"1602
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1602: __asm("PIE2 equ 08Dh");
+[; <" PIE2 equ 08Dh ;# ">
+"1659
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1659: __asm("PCON equ 08Eh");
+[; <" PCON equ 08Eh ;# ">
+"1706
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1706: __asm("OSCCON equ 08Fh");
+[; <" OSCCON equ 08Fh ;# ">
+"1771
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1771: __asm("OSCTUNE equ 090h");
+[; <" OSCTUNE equ 090h ;# ">
+"1823
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1823: __asm("SSPCON2 equ 091h");
+[; <" SSPCON2 equ 091h ;# ">
+"1885
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1885: __asm("PR2 equ 092h");
+[; <" PR2 equ 092h ;# ">
+"1892
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1892: __asm("SSPADD equ 093h");
+[; <" SSPADD equ 093h ;# ">
+"1899
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1899: __asm("SSPMSK equ 093h");
+[; <" SSPMSK equ 093h ;# ">
+"1904
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 1904: __asm("MSK equ 093h");
+[; <" MSK equ 093h ;# ">
+"2021
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2021: __asm("SSPSTAT equ 094h");
+[; <" SSPSTAT equ 094h ;# ">
+"2190
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2190: __asm("WPUB equ 095h");
+[; <" WPUB equ 095h ;# ">
+"2260
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2260: __asm("IOCB equ 096h");
+[; <" IOCB equ 096h ;# ">
+"2330
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2330: __asm("VRCON equ 097h");
+[; <" VRCON equ 097h ;# ">
+"2400
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2400: __asm("TXSTA equ 098h");
+[; <" TXSTA equ 098h ;# ">
+"2486
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2486: __asm("SPBRG equ 099h");
+[; <" SPBRG equ 099h ;# ">
+"2548
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2548: __asm("SPBRGH equ 09Ah");
+[; <" SPBRGH equ 09Ah ;# ">
+"2618
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2618: __asm("PWM1CON equ 09Bh");
+[; <" PWM1CON equ 09Bh ;# ">
+"2688
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2688: __asm("ECCPAS equ 09Ch");
+[; <" ECCPAS equ 09Ch ;# ">
+"2770
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2770: __asm("PSTRCON equ 09Dh");
+[; <" PSTRCON equ 09Dh ;# ">
+"2814
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2814: __asm("ADRESL equ 09Eh");
+[; <" ADRESL equ 09Eh ;# ">
+"2821
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2821: __asm("ADCON1 equ 09Fh");
+[; <" ADCON1 equ 09Fh ;# ">
+"2855
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2855: __asm("WDTCON equ 0105h");
+[; <" WDTCON equ 0105h ;# ">
+"2908
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2908: __asm("CM1CON0 equ 0107h");
+[; <" CM1CON0 equ 0107h ;# ">
+"2973
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 2973: __asm("CM2CON0 equ 0108h");
+[; <" CM2CON0 equ 0108h ;# ">
+"3038
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3038: __asm("CM2CON1 equ 0109h");
+[; <" CM2CON1 equ 0109h ;# ">
+"3089
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3089: __asm("EEDATA equ 010Ch");
+[; <" EEDATA equ 010Ch ;# ">
+"3094
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3094: __asm("EEDAT equ 010Ch");
+[; <" EEDAT equ 010Ch ;# ">
+"3101
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3101: __asm("EEADR equ 010Dh");
+[; <" EEADR equ 010Dh ;# ">
+"3108
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3108: __asm("EEDATH equ 010Eh");
+[; <" EEDATH equ 010Eh ;# ">
+"3115
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3115: __asm("EEADRH equ 010Fh");
+[; <" EEADRH equ 010Fh ;# ">
+"3122
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3122: __asm("SRCON equ 0185h");
+[; <" SRCON equ 0185h ;# ">
+"3179
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3179: __asm("BAUDCTL equ 0187h");
+[; <" BAUDCTL equ 0187h ;# ">
+"3231
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3231: __asm("ANSEL equ 0188h");
+[; <" ANSEL equ 0188h ;# ">
+"3275
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3275: __asm("ANSELH equ 0189h");
+[; <" ANSELH equ 0189h ;# ">
+"3325
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3325: __asm("EECON1 equ 018Ch");
+[; <" EECON1 equ 018Ch ;# ">
+"3370
+[; ;C:/Users/hosam/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f882.h: 3370: __asm("EECON2 equ 018Dh");
+[; <" EECON2 equ 018Dh ;# ">
+"48 source/VendingMachine/VM.c
+[; ;source/VendingMachine/VM.c: 48: static unsigned int adc_val = 0;
+[v _adc_val `ui ~T0 @X0 1 s ]
+[i _adc_val
+-> -> 0 `i `ui
+]
+"51
+[; ;source/VendingMachine/VM.c: 51: static char temp[2] = {0};
+[v _temp `uc ~T0 @X0 -> 2 `i s ]
+[i _temp
+:U ..
+-> -> 0 `i `uc
+..
+]
+"54
+[; ;source/VendingMachine/VM.c: 54: static volatile unsigned char gCurrentState = VM_STATE_INITIAL;
+[v _gCurrentState `Vuc ~T0 @X0 1 s ]
+[i _gCurrentState
+-> . `E1232 0 `uc
+]
+"55
+[; ;source/VendingMachine/VM.c: 55: static volatile unsigned char gCurrentDrink = 0;
+[v _gCurrentDrink `Vuc ~T0 @X0 1 s ]
+[i _gCurrentDrink
+-> -> 0 `i `uc
+]
+"56
+[; ;source/VendingMachine/VM.c: 56: static volatile signed char gCurrentDrinkPrice = 0;
+[v _gCurrentDrinkPrice `Vc ~T0 @X0 1 s ]
+[i _gCurrentDrinkPrice
+-> -> 0 `i `c
+]
+"71
+[; ;source/VendingMachine/VM.c: 71: void VM_Init(void)
+[v _VM_Init `(v ~T0 @X0 1 ef ]
+"72
+[; ;source/VendingMachine/VM.c: 72: {
+{
+[e :U _VM_Init ]
+[f ]
+"74
+[; ;source/VendingMachine/VM.c: 74:     gCurrentState = VM_STATE_INITIAL;
+[e = _gCurrentState -> . `E1232 0 `uc ]
+"77
+[; ;source/VendingMachine/VM.c: 77:     DIO_setPinMode(DIO_PORTA, DIO_PIN0, DIO_OUTPUT_MODE);
+[e ( _DIO_setPinMode (3 , , . `E1261 0 . `E1266 0 . `E1276 0 ]
+"78
+[; ;source/VendingMachine/VM.c: 78:     DIO_setPinMode(DIO_PORTA, DIO_PIN1, DIO_OUTPUT_MODE);
+[e ( _DIO_setPinMode (3 , , . `E1261 0 . `E1266 1 . `E1276 0 ]
+"79
+[; ;source/VendingMachine/VM.c: 79:     DIO_setPinValue(DIO_PORTA, DIO_PIN0, 0);
+[e ( _DIO_setPinValue (3 , , . `E1261 0 . `E1266 0 -> -> 0 `i `uc ]
+"80
+[; ;source/VendingMachine/VM.c: 80:     DIO_setPinValue(DIO_PORTA, DIO_PIN1, 0);
+[e ( _DIO_setPinValue (3 , , . `E1261 0 . `E1266 1 -> -> 0 `i `uc ]
+"82
+[; ;source/VendingMachine/VM.c: 82:     DIO_setPinMode(DIO_PORTA, DIO_PIN2, DIO_OUTPUT_MODE);
+[e ( _DIO_setPinMode (3 , , . `E1261 0 . `E1266 2 . `E1276 0 ]
+"83
+[; ;source/VendingMachine/VM.c: 83:     DIO_setPinValue(DIO_PORTA, DIO_PIN0, 0);
+[e ( _DIO_setPinValue (3 , , . `E1261 0 . `E1266 0 -> -> 0 `i `uc ]
+"85
+[; ;source/VendingMachine/VM.c: 85:     DIO_setPinMode(DIO_PORTB, DIO_PIN0, DIO_INTERRUPT_CHANGE_MODE);
+[e ( _DIO_setPinMode (3 , , . `E1261 1 . `E1266 0 . `E1276 2 ]
+"86
+[; ;source/VendingMachine/VM.c: 86:     DIO_setPinMode(DIO_PORTB, DIO_PIN1, DIO_INTERRUPT_CHANGE_MODE);
+[e ( _DIO_setPinMode (3 , , . `E1261 1 . `E1266 1 . `E1276 2 ]
+"87
+[; ;source/VendingMachine/VM.c: 87:     DIO_setPinMode(DIO_PORTB, DIO_PIN2, DIO_INTERRUPT_CHANGE_MODE);
+[e ( _DIO_setPinMode (3 , , . `E1261 1 . `E1266 2 . `E1276 2 ]
+"90
+[; ;source/VendingMachine/VM.c: 90:     ADC_Init();
+[e ( _ADC_Init ..  ]
+"93
+[; ;source/VendingMachine/VM.c: 93:     T2CONbits.TMR2ON = 0;
+[e = . . _T2CONbits 0 1 -> -> 0 `i `uc ]
+"94
+[; ;source/VendingMachine/VM.c: 94:     T2CONbits.T2CKPS = 3;
+[e = . . _T2CONbits 0 0 -> -> 3 `i `uc ]
+"95
+[; ;source/VendingMachine/VM.c: 95:     T2CONbits.TOUTPS = 0x9;
+[e = . . _T2CONbits 0 2 -> -> 9 `i `uc ]
+"96
+[; ;source/VendingMachine/VM.c: 96:     PIE1bits.TMR2IE = 1;
+[e = . . _PIE1bits 0 1 -> -> 1 `i `uc ]
+"97
+[; ;source/VendingMachine/VM.c: 97:     PIR1bits.TMR2IF = 0;
+[e = . . _PIR1bits 0 1 -> -> 0 `i `uc ]
+"98
+[; ;source/VendingMachine/VM.c: 98:     PR2 = 0x8E;
+[e = _PR2 -> -> 142 `i `uc ]
+"99
+[; ;source/VendingMachine/VM.c: 99:     T2CONbits.TMR2ON = 1;
+[e = . . _T2CONbits 0 1 -> -> 1 `i `uc ]
+"100
+[; ;source/VendingMachine/VM.c: 100:     TMR2 = 0;
+[e = _TMR2 -> -> 0 `i `uc ]
+[v F1329 `S134 ~T0 @X0 1 s ]
+[i F1329
+:U ..
+:U ..
+"103
+[; ;source/VendingMachine/VM.c: 103:     LCD lcd = { &PORTC, 0, 3, 4, 5, 6, 7 };
+&U _PORTC
+-> -> 0 `i `uc
+-> -> 3 `i `uc
+-> -> 4 `i `uc
+-> -> 5 `i `uc
+-> -> 6 `i `uc
+-> -> 7 `i `uc
+..
+..
+]
+[v _lcd `S134 ~T0 @X0 1 a ]
+[e = _lcd F1329 ]
+"104
+[; ;source/VendingMachine/VM.c: 104:     LCD_Init(lcd);
+[e ( _LCD_Init (1 _lcd ]
+"105
+[; ;source/VendingMachine/VM.c: 105:     LCD_Write( (0x01 & 0xF0) >> 4 ); LCD_Write( 0x01 & 0x0F);;
+[e ( _LCD_Write (1 -> >> & -> 1 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & -> 1 `i -> 15 `i `uc ]
+"107
+[; ;source/VendingMachine/VM.c: 107:     (INTCONbits.GIE = 1);
+[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
+"108
+[; ;source/VendingMachine/VM.c: 108:     (INTCONbits.PEIE = 1);
+[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
+"112
+[; ;source/VendingMachine/VM.c: 112:     gCurrentState = VM_STATE_DRINK_SELECTION;
+[e = _gCurrentState -> . `E1232 1 `uc ]
+"114
+[; ;source/VendingMachine/VM.c: 114:     gCurrentDrink = VM_DRINK_COLA;
+[e = _gCurrentDrink -> . `E1242 0 `uc ]
+"116
+[; ;source/VendingMachine/VM.c: 116:     do { if ( 0 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 0 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 0 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 0 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 138 ]
+{
+[e $ ! == -> 0 `i -> 0 `i 139  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 140  ]
+[e :U 139 ]
+[e $ ! == -> 0 `i -> 1 `i 141  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 142  ]
+[e :U 141 ]
+[e $ ! == -> 0 `i -> 2 `i 143  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 144  ]
+[e :U 143 ]
+[e $ ! == -> 0 `i -> 3 `i 145  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 145 ]
+[e :U 144 ]
+[e :U 142 ]
+[e :U 140 ]
+}
+[e :U 137 ]
+"117
+[; ;source/VendingMachine/VM.c: 117:     LCD_PutString("Select Drink:");
+[e ( _LCD_PutString (1 :s 1C ]
+"118
+[; ;source/VendingMachine/VM.c: 118: }
+[e :UE 135 ]
+}
+"124
+[; ;source/VendingMachine/VM.c: 124: void VM_Running(void)
+[v _VM_Running `(v ~T0 @X0 1 ef ]
+"125
+[; ;source/VendingMachine/VM.c: 125: {
+{
+[e :U _VM_Running ]
+[f ]
+"127
+[; ;source/VendingMachine/VM.c: 127:     if(gCurrentState == VM_STATE_INITIAL)
+[e $ ! == -> _gCurrentState `i -> . `E1232 0 `i 147  ]
+"128
+[; ;source/VendingMachine/VM.c: 128:         VM_Init();
+[e ( _VM_Init ..  ]
+[e :U 147 ]
+"131
+[; ;source/VendingMachine/VM.c: 131:     switch (gCurrentState)
+[e $U 149  ]
+"132
+[; ;source/VendingMachine/VM.c: 132:     {
+{
+"133
+[; ;source/VendingMachine/VM.c: 133:     case VM_STATE_DRINK_SELECTION:
+[e :U 150 ]
+"134
+[; ;source/VendingMachine/VM.c: 134:         VM_Mode_DrinkSelection();
+[e ( _VM_Mode_DrinkSelection ..  ]
+"135
+[; ;source/VendingMachine/VM.c: 135:         break;
+[e $U 148  ]
+"136
+[; ;source/VendingMachine/VM.c: 136:     case VM_STATE_COIN_INSERTION:
+[e :U 151 ]
+"137
+[; ;source/VendingMachine/VM.c: 137:         VM_Mode_CoinInsertion();
+[e ( _VM_Mode_CoinInsertion ..  ]
+"138
+[; ;source/VendingMachine/VM.c: 138:         break;
+[e $U 148  ]
+"139
+[; ;source/VendingMachine/VM.c: 139:     case VM_STATE_DRINK_DISPENSE:
+[e :U 152 ]
+"140
+[; ;source/VendingMachine/VM.c: 140:         VM_Mode_DispenseDrink();
+[e ( _VM_Mode_DispenseDrink ..  ]
+"141
+[; ;source/VendingMachine/VM.c: 141:         break;
+[e $U 148  ]
+"142
+[; ;source/VendingMachine/VM.c: 142:     case VM_STATE_DRINK_READY:
+[e :U 153 ]
+"143
+[; ;source/VendingMachine/VM.c: 143:         do { if ( 0 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 0 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 0 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 0 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 156 ]
+{
+[e $ ! == -> 0 `i -> 0 `i 157  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 158  ]
+[e :U 157 ]
+[e $ ! == -> 0 `i -> 1 `i 159  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 160  ]
+[e :U 159 ]
+[e $ ! == -> 0 `i -> 2 `i 161  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 162  ]
+[e :U 161 ]
+[e $ ! == -> 0 `i -> 3 `i 163  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 163 ]
+[e :U 162 ]
+[e :U 160 ]
+[e :U 158 ]
+}
+[e :U 155 ]
+"144
+[; ;source/VendingMachine/VM.c: 144:         LCD_PutString("Please Collect    ");
+[e ( _LCD_PutString (1 :s 2C ]
+"145
+[; ;source/VendingMachine/VM.c: 145:         do { if ( 1 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 1 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 1 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 1 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 166 ]
+{
+[e $ ! == -> 1 `i -> 0 `i 167  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 168  ]
+[e :U 167 ]
+[e $ ! == -> 1 `i -> 1 `i 169  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 170  ]
+[e :U 169 ]
+[e $ ! == -> 1 `i -> 2 `i 171  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 172  ]
+[e :U 171 ]
+[e $ ! == -> 1 `i -> 3 `i 173  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 173 ]
+[e :U 172 ]
+[e :U 170 ]
+[e :U 168 ]
+}
+[e :U 165 ]
+"146
+[; ;source/VendingMachine/VM.c: 146:         LCD_PutString("Your Drink!     ");
+[e ( _LCD_PutString (1 :s 3C ]
+"148
+[; ;source/VendingMachine/VM.c: 148:         TIMR1_Delay5s();
+[e ( _TIMR1_Delay5s ..  ]
+"149
+[; ;source/VendingMachine/VM.c: 149:         gCurrentState = VM_STATE_INITIAL;
+[e = _gCurrentState -> . `E1232 0 `uc ]
+"150
+[; ;source/VendingMachine/VM.c: 150:         break;
+[e $U 148  ]
+"151
+[; ;source/VendingMachine/VM.c: 151:     case VM_STATE_DISPENSE_CHANGE:
+[e :U 174 ]
+"152
+[; ;source/VendingMachine/VM.c: 152:         VM_Mode_DispenseChange();
+[e ( _VM_Mode_DispenseChange ..  ]
+"153
+[; ;source/VendingMachine/VM.c: 153:         break;
+[e $U 148  ]
+"154
+[; ;source/VendingMachine/VM.c: 154:     default:
+[e :U 175 ]
+"155
+[; ;source/VendingMachine/VM.c: 155:         break;
+[e $U 148  ]
+"156
+[; ;source/VendingMachine/VM.c: 156:     }
+}
+[e $U 148  ]
+[e :U 149 ]
+[e [\ -> _gCurrentState `i , $ . `E1232 1 150
+ , $ . `E1232 2 151
+ , $ . `E1232 3 152
+ , $ . `E1232 4 153
+ , $ . `E1232 5 174
+ 175 ]
+[e :U 148 ]
+"157
+[; ;source/VendingMachine/VM.c: 157: }
+[e :UE 146 ]
+}
+"166
+[; ;source/VendingMachine/VM.c: 166: static void VM_Mode_DrinkSelection(void)
+[v _VM_Mode_DrinkSelection `(v ~T0 @X0 1 sf ]
+"167
+[; ;source/VendingMachine/VM.c: 167: {
+{
+[e :U _VM_Mode_DrinkSelection ]
+[f ]
+"169
+[; ;source/VendingMachine/VM.c: 169:     do { if ( 1 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 1 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 1 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 1 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 179 ]
+{
+[e $ ! == -> 1 `i -> 0 `i 180  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 181  ]
+[e :U 180 ]
+[e $ ! == -> 1 `i -> 1 `i 182  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 183  ]
+[e :U 182 ]
+[e $ ! == -> 1 `i -> 2 `i 184  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 185  ]
+[e :U 184 ]
+[e $ ! == -> 1 `i -> 3 `i 186  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 186 ]
+[e :U 185 ]
+[e :U 183 ]
+[e :U 181 ]
+}
+[e :U 178 ]
+"170
+[; ;source/VendingMachine/VM.c: 170:     switch (gCurrentDrink)
+[e $U 188  ]
+"171
+[; ;source/VendingMachine/VM.c: 171:     {
+{
+"172
+[; ;source/VendingMachine/VM.c: 172:         case VM_DRINK_COLA:
+[e :U 189 ]
+"173
+[; ;source/VendingMachine/VM.c: 173:             LCD_PutString("Cola 80p      ");
+[e ( _LCD_PutString (1 :s 4C ]
+"174
+[; ;source/VendingMachine/VM.c: 174:             break;
+[e $U 187  ]
+"175
+[; ;source/VendingMachine/VM.c: 175:         case VM_DRINK_LEMONADE:
+[e :U 190 ]
+"176
+[; ;source/VendingMachine/VM.c: 176:             LCD_PutString("Lemonade 80p");
+[e ( _LCD_PutString (1 :s 5C ]
+"177
+[; ;source/VendingMachine/VM.c: 177:             break;
+[e $U 187  ]
+"178
+[; ;source/VendingMachine/VM.c: 178:         case VM_DRINK_ORANGE:
+[e :U 191 ]
+"179
+[; ;source/VendingMachine/VM.c: 179:             LCD_PutString("Orange 60p    ");
+[e ( _LCD_PutString (1 :s 6C ]
+"180
+[; ;source/VendingMachine/VM.c: 180:             break;
+[e $U 187  ]
+"181
+[; ;source/VendingMachine/VM.c: 181:         case VM_DRINK_WATER:
+[e :U 192 ]
+"182
+[; ;source/VendingMachine/VM.c: 182:             LCD_PutString("Water 50p     ");
+[e ( _LCD_PutString (1 :s 7C ]
+"183
+[; ;source/VendingMachine/VM.c: 183:             break;
+[e $U 187  ]
+"184
+[; ;source/VendingMachine/VM.c: 184:     }
+}
+[e $U 187  ]
+[e :U 188 ]
+[e [\ -> _gCurrentDrink `i , $ . `E1242 0 189
+ , $ . `E1242 1 190
+ , $ . `E1242 2 191
+ , $ . `E1242 3 192
+ 187 ]
+[e :U 187 ]
+"185
+[; ;source/VendingMachine/VM.c: 185: }
+[e :UE 176 ]
+}
+"193
+[; ;source/VendingMachine/VM.c: 193: static void VM_Mode_CoinInsertion(void)
+[v _VM_Mode_CoinInsertion `(v ~T0 @X0 1 sf ]
+"194
+[; ;source/VendingMachine/VM.c: 194: {
+{
+[e :U _VM_Mode_CoinInsertion ]
+[f ]
+"196
+[; ;source/VendingMachine/VM.c: 196:     if(gCurrentDrinkPrice > 0)
+[e $ ! > -> _gCurrentDrinkPrice `i -> 0 `i 194  ]
+"197
+[; ;source/VendingMachine/VM.c: 197:     {
+{
+"199
+[; ;source/VendingMachine/VM.c: 199:         temp[0] = '0' + (gCurrentDrinkPrice);
+[e = *U + &U _temp * -> -> -> 0 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + -> 48 `ui -> -> _gCurrentDrinkPrice `i `ui `uc ]
+"202
+[; ;source/VendingMachine/VM.c: 202:         do { if ( 0 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 0 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 0 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 0 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 197 ]
+{
+[e $ ! == -> 0 `i -> 0 `i 198  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 199  ]
+[e :U 198 ]
+[e $ ! == -> 0 `i -> 1 `i 200  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 201  ]
+[e :U 200 ]
+[e $ ! == -> 0 `i -> 2 `i 202  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 203  ]
+[e :U 202 ]
+[e $ ! == -> 0 `i -> 3 `i 204  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 204 ]
+[e :U 203 ]
+[e :U 201 ]
+[e :U 199 ]
+}
+[e :U 196 ]
+"203
+[; ;source/VendingMachine/VM.c: 203:         LCD_PutString("Insert Coins:  ");
+[e ( _LCD_PutString (1 :s 8C ]
+"204
+[; ;source/VendingMachine/VM.c: 204:         do { if ( 1 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 1 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 1 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 1 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 207 ]
+{
+[e $ ! == -> 1 `i -> 0 `i 208  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 209  ]
+[e :U 208 ]
+[e $ ! == -> 1 `i -> 1 `i 210  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 211  ]
+[e :U 210 ]
+[e $ ! == -> 1 `i -> 2 `i 212  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 213  ]
+[e :U 212 ]
+[e $ ! == -> 1 `i -> 3 `i 214  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 214 ]
+[e :U 213 ]
+[e :U 211 ]
+[e :U 209 ]
+}
+[e :U 206 ]
+"205
+[; ;source/VendingMachine/VM.c: 205:         LCD_PutString(temp);
+[e ( _LCD_PutString (1 &U _temp ]
+"206
+[; ;source/VendingMachine/VM.c: 206:         ( LCD_PutString("0              "));
+[e ( _LCD_PutString (1 :s 9C ]
+"207
+[; ;source/VendingMachine/VM.c: 207:     }
+}
+[e $U 215  ]
+"208
+[; ;source/VendingMachine/VM.c: 208:     else if (gCurrentDrinkPrice <= 0)
+[e :U 194 ]
+[e $ ! <= -> _gCurrentDrinkPrice `i -> 0 `i 216  ]
+"209
+[; ;source/VendingMachine/VM.c: 209:         gCurrentState = VM_STATE_DRINK_DISPENSE;
+[e = _gCurrentState -> . `E1232 3 `uc ]
+[e :U 216 ]
+[e :U 215 ]
+"210
+[; ;source/VendingMachine/VM.c: 210: }
+[e :UE 193 ]
+}
+"217
+[; ;source/VendingMachine/VM.c: 217: static void VM_Mode_DispenseDrink(void)
+[v _VM_Mode_DispenseDrink `(v ~T0 @X0 1 sf ]
+"218
+[; ;source/VendingMachine/VM.c: 218: {
+{
+[e :U _VM_Mode_DispenseDrink ]
+[f ]
+"219
+[; ;source/VendingMachine/VM.c: 219:         DIO_setPinValue(DIO_PORTA, DIO_PIN0, 1);
+[e ( _DIO_setPinValue (3 , , . `E1261 0 . `E1266 0 -> -> 1 `i `uc ]
+"221
+[; ;source/VendingMachine/VM.c: 221:         do { if ( 0 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 0 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 0 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 0 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 220 ]
+{
+[e $ ! == -> 0 `i -> 0 `i 221  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 222  ]
+[e :U 221 ]
+[e $ ! == -> 0 `i -> 1 `i 223  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 224  ]
+[e :U 223 ]
+[e $ ! == -> 0 `i -> 2 `i 225  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 226  ]
+[e :U 225 ]
+[e $ ! == -> 0 `i -> 3 `i 227  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 227 ]
+[e :U 226 ]
+[e :U 224 ]
+[e :U 222 ]
+}
+[e :U 219 ]
+"222
+[; ;source/VendingMachine/VM.c: 222:         LCD_PutString("Drink Dispensing");
+[e ( _LCD_PutString (1 :s 10C ]
+"223
+[; ;source/VendingMachine/VM.c: 223:         do { if ( 1 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 1 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 1 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 1 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 230 ]
+{
+[e $ ! == -> 1 `i -> 0 `i 231  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 232  ]
+[e :U 231 ]
+[e $ ! == -> 1 `i -> 1 `i 233  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 234  ]
+[e :U 233 ]
+[e $ ! == -> 1 `i -> 2 `i 235  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 236  ]
+[e :U 235 ]
+[e $ ! == -> 1 `i -> 3 `i 237  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 237 ]
+[e :U 236 ]
+[e :U 234 ]
+[e :U 232 ]
+}
+[e :U 229 ]
+"224
+[; ;source/VendingMachine/VM.c: 224:         ( LCD_PutString("          "));
+[e ( _LCD_PutString (1 :s 11C ]
+"225
+[; ;source/VendingMachine/VM.c: 225:         do { if ( 1 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 1 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 1 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 1 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 240 ]
+{
+[e $ ! == -> 1 `i -> 0 `i 241  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 242  ]
+[e :U 241 ]
+[e $ ! == -> 1 `i -> 1 `i 243  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 244  ]
+[e :U 243 ]
+[e $ ! == -> 1 `i -> 2 `i 245  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 246  ]
+[e :U 245 ]
+[e $ ! == -> 1 `i -> 3 `i 247  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 247 ]
+[e :U 246 ]
+[e :U 244 ]
+[e :U 242 ]
+}
+[e :U 239 ]
+"227
+[; ;source/VendingMachine/VM.c: 227:         OPTION_REGbits.T0CS = 0;
+[e = . . _OPTION_REGbits 0 3 -> -> 0 `i `uc ]
+"228
+[; ;source/VendingMachine/VM.c: 228:         OPTION_REGbits.PSA = 0;
+[e = . . _OPTION_REGbits 0 1 -> -> 0 `i `uc ]
+"229
+[; ;source/VendingMachine/VM.c: 229:         OPTION_REGbits.PS = 7;
+[e = . . _OPTION_REGbits 0 0 -> -> 7 `i `uc ]
+"230
+[; ;source/VendingMachine/VM.c: 230:         for(unsigned char i=0 ; i<76 ; i++)
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 76 `i 248  ]
+[e $U 249  ]
+[e :U 248 ]
+"231
+[; ;source/VendingMachine/VM.c: 231:         {
+{
+"232
+[; ;source/VendingMachine/VM.c: 232:             while (!INTCONbits.TMR0IF);
+[e $U 251  ]
+[e :U 252 ]
+[e :U 251 ]
+[e $ ! != -> . . _INTCONbits 1 1 `i -> 0 `i 252  ]
+[e :U 253 ]
+"233
+[; ;source/VendingMachine/VM.c: 233:             if(i == 1)
+[e $ ! == -> _i `i -> 1 `i 254  ]
+"234
+[; ;source/VendingMachine/VM.c: 234:                     (LCD_PutString("...."));
+[e ( _LCD_PutString (1 :s 12C ]
+[e $U 255  ]
+"235
+[; ;source/VendingMachine/VM.c: 235:             else if(i == 20)
+[e :U 254 ]
+[e $ ! == -> _i `i -> 20 `i 256  ]
+"236
+[; ;source/VendingMachine/VM.c: 236:                     (LCD_PutString("...."));
+[e ( _LCD_PutString (1 :s 13C ]
+[e $U 257  ]
+"237
+[; ;source/VendingMachine/VM.c: 237:             else if(i == 40)
+[e :U 256 ]
+[e $ ! == -> _i `i -> 40 `i 258  ]
+"238
+[; ;source/VendingMachine/VM.c: 238:                     (LCD_PutString("...."));
+[e ( _LCD_PutString (1 :s 14C ]
+[e $U 259  ]
+"239
+[; ;source/VendingMachine/VM.c: 239:             else if(i == 70)
+[e :U 258 ]
+[e $ ! == -> _i `i -> 70 `i 260  ]
+"240
+[; ;source/VendingMachine/VM.c: 240:                     (LCD_PutString("...."));
+[e ( _LCD_PutString (1 :s 15C ]
+[e :U 260 ]
+[e :U 259 ]
+[e :U 257 ]
+[e :U 255 ]
+"241
+[; ;source/VendingMachine/VM.c: 241:             INTCONbits.TMR0IF = 0;
+[e = . . _INTCONbits 1 1 -> -> 0 `i `uc ]
+"242
+[; ;source/VendingMachine/VM.c: 242:         }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 76 `i 248  ]
+[e :U 249 ]
+}
+"243
+[; ;source/VendingMachine/VM.c: 243:         DIO_setPinValue(DIO_PORTA, DIO_PIN0, 0);
+[e ( _DIO_setPinValue (3 , , . `E1261 0 . `E1266 0 -> -> 0 `i `uc ]
+"244
+[; ;source/VendingMachine/VM.c: 244:         if(gCurrentDrinkPrice == 0)
+[e $ ! == -> _gCurrentDrinkPrice `i -> 0 `i 261  ]
+"245
+[; ;source/VendingMachine/VM.c: 245:             gCurrentState = VM_STATE_DRINK_READY;
+[e = _gCurrentState -> . `E1232 4 `uc ]
+[e $U 262  ]
+"246
+[; ;source/VendingMachine/VM.c: 246:         else
+[e :U 261 ]
+"247
+[; ;source/VendingMachine/VM.c: 247:             gCurrentState = VM_STATE_DISPENSE_CHANGE;
+[e = _gCurrentState -> . `E1232 5 `uc ]
+[e :U 262 ]
+"248
+[; ;source/VendingMachine/VM.c: 248: }
+[e :UE 217 ]
+}
+"255
+[; ;source/VendingMachine/VM.c: 255: static void VM_Mode_DispenseChange(void)
+[v _VM_Mode_DispenseChange `(v ~T0 @X0 1 sf ]
+"256
+[; ;source/VendingMachine/VM.c: 256: {
+{
+[e :U _VM_Mode_DispenseChange ]
+[f ]
+"258
+[; ;source/VendingMachine/VM.c: 258:     char change_count = 0;
+[v _change_count `uc ~T0 @X0 1 a ]
+[e = _change_count -> -> 0 `i `uc ]
+"259
+[; ;source/VendingMachine/VM.c: 259:     while(gCurrentDrinkPrice != 0)
+[e $U 264  ]
+[e :U 265 ]
+"260
+[; ;source/VendingMachine/VM.c: 260:         {
+{
+"261
+[; ;source/VendingMachine/VM.c: 261:             gCurrentDrinkPrice++;
+[e ++ _gCurrentDrinkPrice -> -> 1 `i `Vc ]
+"262
+[; ;source/VendingMachine/VM.c: 262:             change_count++;
+[e ++ _change_count -> -> 1 `i `uc ]
+"263
+[; ;source/VendingMachine/VM.c: 263:         }
+}
+[e :U 264 ]
+"259
+[; ;source/VendingMachine/VM.c: 259:     while(gCurrentDrinkPrice != 0)
+[e $ != -> _gCurrentDrinkPrice `i -> 0 `i 265  ]
+[e :U 266 ]
+"265
+[; ;source/VendingMachine/VM.c: 265:         temp[0] = '0' + (change_count);
+[e = *U + &U _temp * -> -> -> 0 `i `ui `ux -> -> # *U &U _temp `ui `ux -> + -> 48 `ui -> _change_count `ui `uc ]
+"267
+[; ;source/VendingMachine/VM.c: 267:         DIO_setPinValue(DIO_PORTA, DIO_PIN1, 1);
+[e ( _DIO_setPinValue (3 , , . `E1261 0 . `E1266 1 -> -> 1 `i `uc ]
+"268
+[; ;source/VendingMachine/VM.c: 268:         do { if ( 0 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 0 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 0 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 0 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 269 ]
+{
+[e $ ! == -> 0 `i -> 0 `i 270  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 271  ]
+[e :U 270 ]
+[e $ ! == -> 0 `i -> 1 `i 272  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 273  ]
+[e :U 272 ]
+[e $ ! == -> 0 `i -> 2 `i 274  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 275  ]
+[e :U 274 ]
+[e $ ! == -> 0 `i -> 3 `i 276  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 276 ]
+[e :U 275 ]
+[e :U 273 ]
+[e :U 271 ]
+}
+[e :U 268 ]
+"269
+[; ;source/VendingMachine/VM.c: 269:         LCD_PutString("Change due:     ");
+[e ( _LCD_PutString (1 :s 16C ]
+"270
+[; ;source/VendingMachine/VM.c: 270:         do { if ( 1 == 0 ) { LCD_Write( (0x80 + 0 & 0xF0) >> 4 ); LCD_Write( 0x80 + 0 & 0x0F);; } else if ( 1 == 1 ) { LCD_Write( (0xC0 + 0 & 0xF0) >> 4 ); LCD_Write( 0xC0 + 0 & 0x0F);; } else if ( 1 == 2 ) { LCD_Write( (0x94 + 0 & 0xF0) >> 4 ); LCD_Write( 0x94 + 0 & 0x0F);; } else if ( 1 == 3 ) { LCD_Write( (0xD4 + 0 & 0xF0) >> 4 ); LCD_Write( 0xD4 + 0 & 0x0F);; } } while ( 0 );
+[e :U 279 ]
+{
+[e $ ! == -> 1 `i -> 0 `i 280  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 128 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 128 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 281  ]
+[e :U 280 ]
+[e $ ! == -> 1 `i -> 1 `i 282  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 192 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 192 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 283  ]
+[e :U 282 ]
+[e $ ! == -> 1 `i -> 2 `i 284  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 148 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 148 `i -> 0 `i -> 15 `i `uc ]
+}
+[e $U 285  ]
+[e :U 284 ]
+[e $ ! == -> 1 `i -> 3 `i 286  ]
+{
+[e ( _LCD_Write (1 -> >> & + -> 212 `i -> 0 `i -> 240 `i -> 4 `i `uc ]
+[e ( _LCD_Write (1 -> & + -> 212 `i -> 0 `i -> 15 `i `uc ]
+}
+[e :U 286 ]
+[e :U 285 ]
+[e :U 283 ]
+[e :U 281 ]
+}
+[e :U 278 ]
+"271
+[; ;source/VendingMachine/VM.c: 271:         LCD_PutString(temp);
+[e ( _LCD_PutString (1 &U _temp ]
+"272
+[; ;source/VendingMachine/VM.c: 272:         ( LCD_PutString("0              "));
+[e ( _LCD_PutString (1 :s 17C ]
+"274
+[; ;source/VendingMachine/VM.c: 274:         TIMR1_Delay5s();
+[e ( _TIMR1_Delay5s ..  ]
+"275
+[; ;source/VendingMachine/VM.c: 275:         DIO_setPinValue(DIO_PORTA, DIO_PIN1, 0);
+[e ( _DIO_setPinValue (3 , , . `E1261 0 . `E1266 1 -> -> 0 `i `uc ]
+"276
+[; ;source/VendingMachine/VM.c: 276:         gCurrentState = VM_STATE_DRINK_READY;
+[e = _gCurrentState -> . `E1232 4 `uc ]
+"277
+[; ;source/VendingMachine/VM.c: 277: }
+[e :UE 263 ]
+}
+"284
+[; ;source/VendingMachine/VM.c: 284: static void TIMR1_Delay5s(void)
+[v _TIMR1_Delay5s `(v ~T0 @X0 1 sf ]
+"285
+[; ;source/VendingMachine/VM.c: 285: {
+{
+[e :U _TIMR1_Delay5s ]
+[f ]
+"286
+[; ;source/VendingMachine/VM.c: 286:     T1CON= 0x31;
+[e = _T1CON -> -> 49 `i `uc ]
+"287
+[; ;source/VendingMachine/VM.c: 287:     TMR1 = 0x76C8;
+[e = _TMR1 -> -> 30408 `i `us ]
+"288
+[; ;source/VendingMachine/VM.c: 288:     for(unsigned char i=0 ; i<10 ; i++)
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 10 `i 288  ]
+[e $U 289  ]
+[e :U 288 ]
+"289
+[; ;source/VendingMachine/VM.c: 289:     {
+{
+"290
+[; ;source/VendingMachine/VM.c: 290:         while (!PIR1bits.TMR1IF);
+[e $U 291  ]
+[e :U 292 ]
+[e :U 291 ]
+[e $ ! != -> . . _PIR1bits 0 0 `i -> 0 `i 292  ]
+[e :U 293 ]
+"291
+[; ;source/VendingMachine/VM.c: 291:         PIR1bits.TMR1IF = 0;
+[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
+"292
+[; ;source/VendingMachine/VM.c: 292:     }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 10 `i 288  ]
+[e :U 289 ]
+}
+"293
+[; ;source/VendingMachine/VM.c: 293: }
+[e :UE 287 ]
+}
+[v $root$_myISR `(v ~T0 @X0 0 e ]
+"298
+[; ;source/VendingMachine/VM.c: 298: void __attribute__((picinterrupt(("")))) myISR(void)
+[v _myISR `(v ~T1 @X0 1 ef ]
+"299
+[; ;source/VendingMachine/VM.c: 299: {
+{
+[e :U _myISR ]
+[f ]
+"300
+[; ;source/VendingMachine/VM.c: 300:     static volatile unsigned char timer_count = 0;
+[v F1341 `Vuc ~T0 @X0 1 s timer_count ]
+[i F1341
+-> -> 0 `i `uc
+]
+"302
+[; ;source/VendingMachine/VM.c: 302:     if (INTCONbits.RBIF)
+[e $ ! != -> . . _INTCONbits 0 0 `i -> 0 `i 295  ]
+"303
+[; ;source/VendingMachine/VM.c: 303:     {
+{
+"304
+[; ;source/VendingMachine/VM.c: 304:         if (PORTBbits.RB0 == 0)
+[e $ ! == -> . . _PORTBbits 0 0 `i -> 0 `i 296  ]
+"305
+[; ;source/VendingMachine/VM.c: 305:         {
+{
+"306
+[; ;source/VendingMachine/VM.c: 306:            switch (gCurrentState)
+[e $U 298  ]
+"307
+[; ;source/VendingMachine/VM.c: 307:               {
+{
+"308
+[; ;source/VendingMachine/VM.c: 308:                 case VM_STATE_DRINK_SELECTION:
+[e :U 299 ]
+"309
+[; ;source/VendingMachine/VM.c: 309:                     if(gCurrentDrink < VM_DRINK_WATER)
+[e $ ! < -> _gCurrentDrink `i -> . `E1242 3 `i 300  ]
+"310
+[; ;source/VendingMachine/VM.c: 310:                         gCurrentDrink++;
+[e ++ _gCurrentDrink -> -> 1 `i `Vuc ]
+[e $U 301  ]
+"311
+[; ;source/VendingMachine/VM.c: 311:                     else
+[e :U 300 ]
+"312
+[; ;source/VendingMachine/VM.c: 312:                         gCurrentDrink = VM_DRINK_COLA;
+[e = _gCurrentDrink -> . `E1242 0 `uc ]
+[e :U 301 ]
+"313
+[; ;source/VendingMachine/VM.c: 313:                     break;
+[e $U 297  ]
+"315
+[; ;source/VendingMachine/VM.c: 315:                 case VM_STATE_COIN_INSERTION:
+[e :U 302 ]
+"316
+[; ;source/VendingMachine/VM.c: 316:                     gCurrentDrinkPrice -= 1;
+[e =- _gCurrentDrinkPrice -> -> 1 `i `Vc ]
+"317
+[; ;source/VendingMachine/VM.c: 317:                     break;
+[e $U 297  ]
+"318
+[; ;source/VendingMachine/VM.c: 318:               }
+}
+[e $U 297  ]
+[e :U 298 ]
+[e [\ -> _gCurrentState `i , $ . `E1232 1 299
+ , $ . `E1232 2 302
+ 297 ]
+[e :U 297 ]
+"319
+[; ;source/VendingMachine/VM.c: 319:         }
+}
+[e $U 303  ]
+"320
+[; ;source/VendingMachine/VM.c: 320:         else if (PORTBbits.RB1 == 0)
+[e :U 296 ]
+[e $ ! == -> . . _PORTBbits 0 1 `i -> 0 `i 304  ]
+"321
+[; ;source/VendingMachine/VM.c: 321:         {
+{
+"322
+[; ;source/VendingMachine/VM.c: 322:             switch (gCurrentState)
+[e $U 306  ]
+"323
+[; ;source/VendingMachine/VM.c: 323:               {
+{
+"324
+[; ;source/VendingMachine/VM.c: 324:                 case VM_STATE_DRINK_SELECTION:
+[e :U 307 ]
+"325
+[; ;source/VendingMachine/VM.c: 325:                     gCurrentState = VM_STATE_COIN_INSERTION;
+[e = _gCurrentState -> . `E1232 2 `uc ]
+"326
+[; ;source/VendingMachine/VM.c: 326:                     switch (gCurrentDrink)
+[e $U 309  ]
+"327
+[; ;source/VendingMachine/VM.c: 327:                     {
+{
+"328
+[; ;source/VendingMachine/VM.c: 328:                         case VM_DRINK_COLA:
+[e :U 310 ]
+"329
+[; ;source/VendingMachine/VM.c: 329:                             gCurrentDrinkPrice = VM_COIN_COLA_80;
+[e = _gCurrentDrinkPrice -> . `E1248 0 `c ]
+"330
+[; ;source/VendingMachine/VM.c: 330:                             break;
+[e $U 308  ]
+"331
+[; ;source/VendingMachine/VM.c: 331:                         case VM_DRINK_LEMONADE:
+[e :U 311 ]
+"332
+[; ;source/VendingMachine/VM.c: 332:                             gCurrentDrinkPrice = VM_COIN_LEMONADE_80;
+[e = _gCurrentDrinkPrice -> . `E1248 1 `c ]
+"333
+[; ;source/VendingMachine/VM.c: 333:                             break;
+[e $U 308  ]
+"334
+[; ;source/VendingMachine/VM.c: 334:                         case VM_DRINK_ORANGE:
+[e :U 312 ]
+"335
+[; ;source/VendingMachine/VM.c: 335:                             gCurrentDrinkPrice = VM_COIN_ORANGE_60;
+[e = _gCurrentDrinkPrice -> . `E1248 2 `c ]
+"336
+[; ;source/VendingMachine/VM.c: 336:                             break;
+[e $U 308  ]
+"337
+[; ;source/VendingMachine/VM.c: 337:                         case VM_DRINK_WATER:
+[e :U 313 ]
+"338
+[; ;source/VendingMachine/VM.c: 338:                             gCurrentDrinkPrice = VM_COIN_WATER_50;
+[e = _gCurrentDrinkPrice -> . `E1248 3 `c ]
+"339
+[; ;source/VendingMachine/VM.c: 339:                             break;
+[e $U 308  ]
+"340
+[; ;source/VendingMachine/VM.c: 340:                     }
+}
+[e $U 308  ]
+[e :U 309 ]
+[e [\ -> _gCurrentDrink `i , $ . `E1242 0 310
+ , $ . `E1242 1 311
+ , $ . `E1242 2 312
+ , $ . `E1242 3 313
+ 308 ]
+[e :U 308 ]
+"341
+[; ;source/VendingMachine/VM.c: 341:                     break;
+[e $U 305  ]
+"343
+[; ;source/VendingMachine/VM.c: 343:                     case VM_STATE_COIN_INSERTION:
+[e :U 314 ]
+"344
+[; ;source/VendingMachine/VM.c: 344:                     gCurrentDrinkPrice -= 2;
+[e =- _gCurrentDrinkPrice -> -> 2 `i `Vc ]
+"345
+[; ;source/VendingMachine/VM.c: 345:                     break;
+[e $U 305  ]
+"346
+[; ;source/VendingMachine/VM.c: 346:               }
+}
+[e $U 305  ]
+[e :U 306 ]
+[e [\ -> _gCurrentState `i , $ . `E1232 1 307
+ , $ . `E1232 2 314
+ 305 ]
+[e :U 305 ]
+"347
+[; ;source/VendingMachine/VM.c: 347:         }
+}
+[e $U 315  ]
+"348
+[; ;source/VendingMachine/VM.c: 348:         else if (PORTBbits.RB2 == 0)
+[e :U 304 ]
+[e $ ! == -> . . _PORTBbits 0 2 `i -> 0 `i 316  ]
+"349
+[; ;source/VendingMachine/VM.c: 349:         {
+{
+"350
+[; ;source/VendingMachine/VM.c: 350:             switch (gCurrentState)
+[e $U 318  ]
+"351
+[; ;source/VendingMachine/VM.c: 351:             {
+{
+"353
+[; ;source/VendingMachine/VM.c: 353:                 case VM_STATE_COIN_INSERTION:
+[e :U 319 ]
+"354
+[; ;source/VendingMachine/VM.c: 354:                     gCurrentDrinkPrice -= 5;
+[e =- _gCurrentDrinkPrice -> -> 5 `i `Vc ]
+"355
+[; ;source/VendingMachine/VM.c: 355:                     break;
+[e $U 317  ]
+"356
+[; ;source/VendingMachine/VM.c: 356:             }
+}
+[e $U 317  ]
+[e :U 318 ]
+[e [\ -> _gCurrentState `i , $ . `E1232 2 319
+ 317 ]
+[e :U 317 ]
+"357
+[; ;source/VendingMachine/VM.c: 357:         }
+}
+[e :U 316 ]
+[e :U 315 ]
+[e :U 303 ]
+"358
+[; ;source/VendingMachine/VM.c: 358:         INTCONbits.RBIF = 0;
+[e = . . _INTCONbits 0 0 -> -> 0 `i `uc ]
+"359
+[; ;source/VendingMachine/VM.c: 359:         return;
+[e $UE 294  ]
+"360
+[; ;source/VendingMachine/VM.c: 360:     }
+}
+[e :U 295 ]
+"361
+[; ;source/VendingMachine/VM.c: 361:     if (PIR1bits.TMR2IF)
+[e $ ! != -> . . _PIR1bits 0 1 `i -> 0 `i 320  ]
+"362
+[; ;source/VendingMachine/VM.c: 362:     {
+{
+"363
+[; ;source/VendingMachine/VM.c: 363:         timer_count++;
+[e ++ F1341 -> -> 1 `i `Vuc ]
+"365
+[; ;source/VendingMachine/VM.c: 365:         if(timer_count == (unsigned char) 22)
+[e $ ! == -> F1341 `i -> -> -> 22 `i `uc `i 321  ]
+"366
+[; ;source/VendingMachine/VM.c: 366:         {
+{
+"367
+[; ;source/VendingMachine/VM.c: 367:             timer_count = 0;
+[e = F1341 -> -> 0 `i `uc ]
+"368
+[; ;source/VendingMachine/VM.c: 368:             adc_val = ADC_Read(ADC9);
+[e = _adc_val ( _ADC_Read (1 . `E1289 6 ]
+"369
+[; ;source/VendingMachine/VM.c: 369:             if(adc_val > 0x199)
+[e $ ! > _adc_val -> -> 409 `i `ui 322  ]
+"370
+[; ;source/VendingMachine/VM.c: 370:                 DIO_setPinValue(DIO_PORTA, DIO_PIN2, 1);
+[e ( _DIO_setPinValue (3 , , . `E1261 0 . `E1266 2 -> -> 1 `i `uc ]
+[e $U 323  ]
+"371
+[; ;source/VendingMachine/VM.c: 371:             else
+[e :U 322 ]
+"372
+[; ;source/VendingMachine/VM.c: 372:                 DIO_setPinValue(DIO_PORTA, DIO_PIN2, 0);
+[e ( _DIO_setPinValue (3 , , . `E1261 0 . `E1266 2 -> -> 0 `i `uc ]
+[e :U 323 ]
+"373
+[; ;source/VendingMachine/VM.c: 373:         }
+}
+[e :U 321 ]
+"374
+[; ;source/VendingMachine/VM.c: 374:         PIR1bits.TMR2IF = 0;
+[e = . . _PIR1bits 0 1 -> -> 0 `i `uc ]
+"375
+[; ;source/VendingMachine/VM.c: 375:         return;
+[e $UE 294  ]
+"376
+[; ;source/VendingMachine/VM.c: 376:     }
+}
+[e :U 320 ]
+"377
+[; ;source/VendingMachine/VM.c: 377: }
+[e :UE 294 ]
+}
+[a 5C 76 101 109 111 110 97 100 101 32 56 48 112 0 ]
+[a 10C 68 114 105 110 107 32 68 105 115 112 101 110 115 105 110 103 0 ]
+[a 1C 83 101 108 101 99 116 32 68 114 105 110 107 58 0 ]
+[a 12C 46 46 46 46 0 ]
+[a 13C 46 46 46 46 0 ]
+[a 14C 46 46 46 46 0 ]
+[a 15C 46 46 46 46 0 ]
+[a 8C 73 110 115 101 114 116 32 67 111 105 110 115 58 32 32 0 ]
+[a 2C 80 108 101 97 115 101 32 67 111 108 108 101 99 116 32 32 32 32 0 ]
+[a 6C 79 114 97 110 103 101 32 54 48 112 32 32 32 32 0 ]
+[a 7C 87 97 116 101 114 32 53 48 112 32 32 32 32 32 0 ]
+[a 16C 67 104 97 110 103 101 32 100 117 101 58 32 32 32 32 32 0 ]
+[a 3C 89 111 117 114 32 68 114 105 110 107 33 32 32 32 32 32 0 ]
+[a 4C 67 111 108 97 32 56 48 112 32 32 32 32 32 32 0 ]
+[a 9C 48 32 32 32 32 32 32 32 32 32 32 32 32 32 32 0 ]
+[a 17C 48 32 32 32 32 32 32 32 32 32 32 32 32 32 32 0 ]
+[a 11C 32 32 32 32 32 32 32 32 32 32 0 ]
